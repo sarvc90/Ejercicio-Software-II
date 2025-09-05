@@ -19,28 +19,15 @@ public class Library {
 
     private void conectarBD() {
         try {
-            // Configuración para SQL Server
             String url = "jdbc:sqlserver://localhost:1433;databaseName=biblioteca;encrypt=true;trustServerCertificate=true;";
-            String usuario = "biblioteca_user"; // o "sa" para administrador
-            String password = "biblioteca123"; // tu password
-            
-            // Cargar el driver explícitamente
+
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            System.out.println("Driver cargado correctamente");
-            
-            conexion = DriverManager.getConnection(url, usuario, password);
-            System.out.println("✅ Conexión exitosa a SQL Server");
-            
-        } catch (ClassNotFoundException e) {
-            System.out.println("❌ Error: Driver JDBC no encontrado");
-            System.out.println("   Descarga: https://learn.microsoft.com/es-es/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server");
-            System.out.println("   Agrega el JAR al classpath");
-        } catch (SQLException e) {
-            System.out.println("❌ Error de conexión SQL: " + e.getMessage());
-            System.out.println("   Verifica que SQL Server esté ejecutándose");
-            System.out.println("   Verifica usuario y contraseña");
+            conexion = DriverManager.getConnection(url, "biblioteca_user", "password123");
+            System.out.println("✅ Conexión exitosa");
+
+        } catch (Exception e) {
+            System.out.println("❌ Error: " + e.getMessage());
         }
-    
     }
 
      private void cargarLibrosDesdeBD() {
