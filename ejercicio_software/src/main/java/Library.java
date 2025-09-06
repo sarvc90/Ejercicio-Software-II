@@ -19,13 +19,12 @@ public class Library {
 
     private void conectarBD() {
         try {
-            // CONEXIÓN PARA DOCKER
+
             String url = "jdbc:sqlserver://localhost:1433;databaseName=biblioteca;encrypt=true;trustServerCertificate=true;";
 
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             System.out.println("Driver cargado correctamente");
 
-            // USUARIO Y CONTRASEÑA DE DOCKER
             String usuario = "sa";
             String contraseña = "Password123*";
 
@@ -35,7 +34,6 @@ public class Library {
         } catch (Exception e) {
             System.out.println("❌ Error de conexión: " + e.getMessage());
             System.out.println("📚 Usando datos de prueba...");
-            // Datos temporales si falla
             libros.add(new Book("Cien años de soledad", "Gabriel García Márquez", 123456));
             libros.add(new Book("1984", "George Orwell", 789012));
             libros.add(new Book("El Quijote", "Miguel de Cervantes", 345678));

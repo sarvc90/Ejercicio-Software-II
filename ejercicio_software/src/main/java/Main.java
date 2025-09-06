@@ -11,7 +11,7 @@ public class Main {
         System.out.print("Ingrese su identificación: ");
         String id = scanner.nextLine();
         
-        // Pasar la conexión al usuario
+ 
         User usuario = new User(nombre, id, biblioteca.getConexion());
         
         int opcion;
@@ -25,7 +25,7 @@ public class Main {
             System.out.print("Seleccione una opción: ");
             
             opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar buffer
+            scanner.nextLine(); 
             
             switch (opcion) {
                 case 1:
