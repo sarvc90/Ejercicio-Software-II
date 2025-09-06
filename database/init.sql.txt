@@ -1,0 +1,22 @@
+CREATE DATABASE biblioteca;
+GO
+
+USE biblioteca;
+GO
+
+CREATE TABLE libros (
+    isbn INT PRIMARY KEY,
+    titulo VARCHAR(100),
+    autor VARCHAR(100)
+);
+GO
+
+INSERT INTO libros (isbn, titulo, autor) VALUES
+(123456, 'Cien años de soledad', 'Gabriel García Márquez'),
+(789012, '1984', 'George Orwell'),
+(345678, 'El Quijote', 'Miguel de Cervantes'),
+(901234, 'Rayuela', 'Julio Cortázar'),
+(567890, 'Crónica de una muerte anunciada', 'Gabriel García Márquez');
+GO
+
+PRINT '✅ Base de datos lista!';
