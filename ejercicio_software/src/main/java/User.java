@@ -13,6 +13,12 @@ public class User {
     }
 
     public void calificarLibro(Library biblioteca) {
+        // Si no hay conexión, no se puede calificar
+        if (biblioteca.getConexion() == null) {
+            System.out.println("\nNo se puede calificar libros de prueba (sin conexión a la BD).");
+            return; // vuelve al menú
+        }
+
         Scanner scanner = new Scanner(System.in);
         
         System.out.print("Ingrese ISBN del libro a calificar: ");
@@ -54,32 +60,44 @@ public class User {
     }
 
     public void crearReseniaLibro(Library biblioteca) {
+        // Si no hay conexión, no se puede reseñar
+        if (biblioteca.getConexion() == null) {
+            System.out.println("\nNo se puede reseñar libros de prueba (sin conexión a la BD).");
+            return; // vuelve al menú
+        }
+
         Scanner scanner = new Scanner(System.in);
-        
+
         System.out.print("Ingrese ISBN del libro para reseña: ");
         int isbn = scanner.nextInt();
         scanner.nextLine();
-        
+
+        // Busca el libro en la biblioteca
         Book libro = biblioteca.buscarLibroPorISBN(isbn);
         if (libro == null) {
             System.out.println("Libro no encontrado");
             return;
         }
-        
+
         System.out.print("Escriba su reseña: ");
         String resenia = scanner.nextLine();
-        
+
         guardarReseniaEnBD(isbn, resenia);
         System.out.println("Reseña guardada exitosamente");
     }
 
     private void guardarReseniaEnBD(int isbn, String resenia) {
         try {
+            // Sentencia SQL para insertar la reseña
             String query = "INSERT INTO resenias (isbn, resenia, usuario_id) VALUES (?, ?, ?)";
             PreparedStatement pstmt = conexion.prepareStatement(query);
+
+            // Asigna parámetros a la consulta
             pstmt.setInt(1, isbn);
             pstmt.setString(2, resenia);
             pstmt.setString(3, identificacion);
+
+            // Ejecuta la inserción en la BD
             pstmt.executeUpdate();
             
         } catch (SQLException e) {
